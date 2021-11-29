@@ -20,6 +20,8 @@ Basic template for ST7789 driver and esp32.
 * LVGL commit : d79ca38
 * LVGL esp32 drivers commit: a68ce89 
 
+LVGL在ESP32上的移植步骤可见在线文档：[Get the LVGL demo project for ESP32](https://docs.lvgl.io/master/get-started/espressif.html)
+
 ***
 
 &emsp;&emsp;工程fork自 [Kevincoooool/lvgl_v8_esp32](https://github.com/Kevincoooool/lvgl_v8_esp32)
