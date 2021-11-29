@@ -31,23 +31,39 @@ static void gui_task(void *arg)
 
    /* Example for 1) */
    static lv_disp_draw_buf_t draw_buf;
-   lv_color_t *buf1 = heap_caps_malloc(DLV_HOR_RES_MAX * DLV_VER_RES_MAX * sizeof(lv_color_t), MALLOC_CAP_DMA);
+   /*lv_color_t *buf1 = heap_caps_malloc(DLV_HOR_RES_MAX * DLV_VER_RES_MAX * sizeof(lv_color_t), MALLOC_CAP_DMA);
    lv_color_t *buf2 = heap_caps_malloc(DLV_HOR_RES_MAX * DLV_VER_RES_MAX * sizeof(lv_color_t), MALLOC_CAP_DMA);
 
-   lv_disp_draw_buf_init(&draw_buf, buf1, buf2, DLV_HOR_RES_MAX * DLV_VER_RES_MAX); /*Initialize the display buffer*/
+   lv_disp_draw_buf_init(&draw_buf, buf1, buf2, DLV_HOR_RES_MAX * DLV_VER_RES_MAX); *//*Initialize the display buffer*/
+
+   // 配置刷屏用的双缓冲区大小，一般给分配的空间为 (CONFIG_LV_HOR_RES_MAX * 40~80)
+   // DISP_BUF_SIZE 可通过menuconfig中的 CONFIG_CUSTOM_DISPLAY_BUFFER_SIZE 来配置。如不自定义，则默认为 (LV_HOR_RES_MAX * 40)
+   lv_color_t *buf1 = heap_caps_malloc(DISP_BUF_SIZE * sizeof(lv_color_t), MALLOC_CAP_DMA);
+   lv_color_t *buf2 = heap_caps_malloc(DISP_BUF_SIZE * sizeof(lv_color_t), MALLOC_CAP_DMA);
+
+   lv_disp_draw_buf_init(&draw_buf, buf1, buf2, DISP_BUF_SIZE); /*Initialize the display buffer*/
 
    static lv_disp_drv_t disp_drv;         /*A variable to hold the drivers. Must be static or global.*/
    lv_disp_drv_init(&disp_drv);           /*Basic initialization*/
    disp_drv.draw_buf = &draw_buf;         /*Set an initialized buffer*/
    disp_drv.flush_cb = disp_driver_flush; /*Set a flush callback to draw to the display*/
-   disp_drv.hor_res = 240;                /*Set the horizontal resolution in pixels*/
-   disp_drv.ver_res = 240;                /*Set the vertical resolution in pixels*/
+   disp_drv.hor_res = CONFIG_LV_HOR_RES_MAX;                /*Set the horizontal resolution in pixels*/
+   disp_drv.ver_res = CONFIG_LV_VER_RES_MAX;                /*Set the vertical resolution in pixels*/
    lv_disp_drv_register(&disp_drv);       /*Register the driver and save the created display objects*/
+
+   /* Register an input device when enabled on the menuconfig */
+#if CONFIG_LV_TOUCH_CONTROLLER != TOUCH_CONTROLLER_NONE
+    lv_indev_drv_t indev_drv;
+    lv_indev_drv_init(&indev_drv);
+    indev_drv.read_cb = touch_driver_read;
+    indev_drv.type = LV_INDEV_TYPE_POINTER;
+    lv_indev_drv_register(&indev_drv);
+#endif
 
    esp_register_freertos_tick_hook(lv_tick_task);
    // lv_demo_widgets();
-   lv_demo_music();
-   // lv_demo_benchmark();
+   // lv_demo_music();
+   lv_demo_benchmark();
    while (1)
    {
       /* Delay 1 tick (assumes FreeRTOS tick is 10ms */
