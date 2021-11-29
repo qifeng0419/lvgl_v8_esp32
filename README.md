@@ -22,7 +22,7 @@ Basic template for ST7789 driver and esp32.
 
 ***
 
-&emsp;&emsp;工程fork自 [Kevincoooool/lvgl_v8_esp32](https://github.com/Kevincoooool/lvgl_v8_esp32)
+&emsp;&emsp;工程fork自 [Kevincoooool/lvgl_v8_esp32](image/lvgl_v8_test2.gif)
 
 
 在原工程的基础上，进行了这些变动：
