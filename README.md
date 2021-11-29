@@ -22,7 +22,7 @@ Basic template for ST7789 driver and esp32.
 
 ***
 
-&emsp;&emsp;工程fork自 [Kevincoooool/lvgl_v8_esp32](image/lvgl_v8_test2.gif)
+&emsp;&emsp;工程fork自 [Kevincoooool/lvgl_v8_esp32](https://github.com/Kevincoooool/lvgl_v8_esp32)
 
 
 在原工程的基础上，进行了这些变动：
@@ -33,9 +33,9 @@ Basic template for ST7789 driver and esp32.
 
 - 添加子模块 [lvgl/lvgl_esp32_drivers](https://github.com/lvgl/lvgl_esp32_drivers)
 
-![lvgl_v8_test2](http://zhiliangma.gitee.io/imgs/202111/lvgl_v8_test2.gif)
+![lvgl_v8_test4](image/lvgl_v8_test4.gif)
 
-&emsp;&emsp;LVGL V8相较于V7.9，可以明显感觉到更为流畅。对于V7.9在ESP32上运行时产生的拉窗帘，在V8上已经减轻了很多。
+&emsp;&emsp;相较于V7.9，可以明显感觉到LVGL V8更为流畅。对于V7.9在ESP32上运行时产生的拉窗帘，在V8上已经减轻了很多。
 
 ## 修改ESP32的刷屏缓存大小
 
