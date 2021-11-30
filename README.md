@@ -31,13 +31,27 @@ LVGL在ESP32上的移植步骤可见在线文档：[Get the LVGL demo project fo
 
 - 可由`menuconfig`配置屏幕分辨率、屏幕缓存容量、选择运行的Demo。
 
-- 更新了触摸驱动，默认配置适配 ST7789V+FT6236U 单点电容触摸屏，已完美适配`ESP-IOT-KIT`开发板。
+- 更新了触摸配置，默认配置适配 ST7789V+FT6236U 单点电容触摸屏，已完美适配`ESP-IOT-KIT`开发板。
 
-- 添加子模块 [lvgl/lvgl_esp32_drivers](https://github.com/lvgl/lvgl_esp32_drivers)
+- 更换了子模块 [lvgl/lvgl_esp32_drivers](https://github.com/lvgl/lvgl_esp32_drivers)
 
 ![lvgl_v8_test4](image/lvgl_v8_test4.gif)
 
 &emsp;&emsp;相较于V7.9，可以明显感觉到LVGL V8更为流畅。对于V7.9在ESP32上运行时产生的拉窗帘，在V8上已经减轻了很多。
+
+***
+
+## 如何使用
+
+1. 递归clone本代码：
+
+```
+git clone --recurse-submodules https://github.com/ZhiliangMa/lvgl_v8_esp32.git
+```
+
+2. 确保电脑已有 ESP-IDF V4.2 或以上版本的环境。编译 `idf.py build`，下载 `idf.py flash`。
+
+![lvgl_v8_test](image/lvgl_v8_test.jpg)
 
 ## 修改ESP32的刷屏缓存大小
 
